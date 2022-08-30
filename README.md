@@ -6,8 +6,8 @@ BatteryHistory is a simple application that displays an interactive view of a ba
 
 <table style="border:none;">
   <tr>
-    <td><img src="" width="480"/></td>
-    <td><img src="" width="480"/></td>
+    <td><img src="https://user-images.githubusercontent.com/60503970/187513306-b44f0a74-78bf-4862-bd61-2b19c66154e5.png" width="480"/></td>
+    <td><img src="https://user-images.githubusercontent.com/60503970/187514732-1eddc0d5-ec95-4fb4-a469-50dbdfe0e73a.png" width="480"/></td>
   </tr>
 </table>
 
