@@ -1,5 +1,7 @@
 # 🔋 AiRISTA Flow RTLS - BatteryHistory
 
+[![GitHub Super-Linter](https://github.com/Plaenkler/BatteryHistory/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 BatteryHistory is a simple application that displays an interactive view of a battery discharge curve. Specifically, the battery history of any active RTLS tag can be viewed.
 
 > The following images show the main views of the application.
