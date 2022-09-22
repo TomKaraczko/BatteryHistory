@@ -7,9 +7,9 @@ import (
 	"log"
 	"net/http"
 
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/handler"
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/rtls"
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/rtls/model"
+	"github.com/Plaenkler/BatteryHistory/pkg/handler"
+	"github.com/Plaenkler/BatteryHistory/pkg/rtls"
+	"github.com/Plaenkler/BatteryHistory/pkg/rtls/model"
 )
 
 type showPage struct {

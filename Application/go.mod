@@ -1,4 +1,4 @@
-module plaenkler.com/avanis/rtls-battery-monitor
+module github.com/Plaenkler/BatteryHistory
 
 go 1.19
 

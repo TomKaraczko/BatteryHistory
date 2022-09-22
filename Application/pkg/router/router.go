@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/config"
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/handler"
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/router/routes"
+	"github.com/Plaenkler/BatteryHistory/pkg/config"
+	"github.com/Plaenkler/BatteryHistory/pkg/handler"
+	"github.com/Plaenkler/BatteryHistory/pkg/router/routes"
 )
 
 var (

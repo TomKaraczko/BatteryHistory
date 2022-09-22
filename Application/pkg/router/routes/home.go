@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/handler"
+	"github.com/Plaenkler/BatteryHistory/pkg/handler"
 )
 
 var (
