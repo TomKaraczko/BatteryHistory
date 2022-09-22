@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"gopkg.in/yaml.v3"
+	yaml "gopkg.in/yaml.v3"
 	"plaenkler.com/avanis/rtls-battery-monitor/pkg/handler"
 )
 
