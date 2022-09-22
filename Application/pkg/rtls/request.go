@@ -9,9 +9,9 @@ import (
 	"github.com/bobziuchkovski/digest"
 	"gorm.io/gorm"
 
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/config"
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/handler"
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/rtls/model"
+	"github.com/Plaenkler/BatteryHistory/pkg/config"
+	"github.com/Plaenkler/BatteryHistory/pkg/handler"
+	"github.com/Plaenkler/BatteryHistory/pkg/rtls/model"
 )
 
 var instance *Manager

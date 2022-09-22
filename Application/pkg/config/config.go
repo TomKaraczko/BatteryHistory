@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
+	"github.com/Plaenkler/BatteryHistory/pkg/handler"
 	yaml "gopkg.in/yaml.v3"
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/handler"
 )
 
 var instance *Config

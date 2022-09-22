@@ -1,7 +1,7 @@
 package main
 
 import (
-	"plaenkler.com/avanis/rtls-battery-monitor/pkg/router"
+	"github.com/Plaenkler/BatteryHistory/pkg/router"
 )
 
 var (
