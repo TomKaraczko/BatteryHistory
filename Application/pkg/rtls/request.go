@@ -38,7 +38,7 @@ func (m *Manager) GetTags(response *model.TagResponse) error {
 
 	_, byteValue, err := m.call("/epe/pos/taglist?fields=all")
 	if err != nil {
-		return fmt.Errorf("[rtls] failed: %s", err.Error())
+		return fmt.Errorf("[rtls] get tags failed: %s", err.Error())
 	}
 
 	err = xml.Unmarshal(byteValue, response)
@@ -54,7 +54,7 @@ func (m *Manager) GetBattery(response *model.BatteryResponse, mac string) error 
 
 	_, byteValue, err := m.call("/epe/cfg/batteryhistory?mac=" + mac)
 	if err != nil {
-		return fmt.Errorf("[rtls] failed: %s", err.Error())
+		return fmt.Errorf("[rtls] get battery failed: %s", err.Error())
 	}
 
 	err = xml.Unmarshal(byteValue, response)
