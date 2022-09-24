@@ -4,7 +4,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/Plaenkler/BatteryHistory/pkg/handler"
 	yaml "gopkg.in/yaml.v3"
 )
 
@@ -19,18 +18,17 @@ type Config struct {
 }
 
 func GetConfig() *Config {
-	defer handler.HandlePanic("config")
-
 	if instance == nil {
-		initConfig()
+		err := initConfig()
+		if err != nil {
+			log.Fatalf("[config] initialization failed - error: %s", err.Error())
+		}
 	}
 
 	return instance
 }
 
-func initConfig() {
-	defer handler.HandlePanic("config")
-
+func initConfig() error {
 	instance = &Config{}
 
 	if _, err := os.Stat("./config.yaml"); err != nil {
@@ -39,20 +37,16 @@ func initConfig() {
 
 	file, err := os.Open("./config.yaml")
 	if err != nil {
-		log.Fatalf("[config] could not open file - error: %s", err.Error())
+		return err
 	}
 	defer file.Close()
 
 	d := yaml.NewDecoder(file)
 
-	if err := d.Decode(&instance); err != nil {
-		log.Fatalf("[config] could not decode file - error: %s", err.Error())
-	}
+	return d.Decode(&instance)
 }
 
 func createConfig() {
-	defer handler.HandlePanic("config")
-
 	config := Config{
 		ServerAddress:  "127.0.0.1",
 		ServerPort:     "8550",
@@ -66,7 +60,7 @@ func createConfig() {
 		log.Fatalf("[config] marshal failed - error: %s", err.Error())
 	}
 
-	err = os.WriteFile("config.yaml", data, 0644)
+	err = os.WriteFile("config.yaml", data, 0600)
 	if err != nil {
 		log.Fatalf("[config] unable to write data - error: %s", err.Error())
 	}
