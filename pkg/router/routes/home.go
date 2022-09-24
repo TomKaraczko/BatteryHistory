@@ -24,15 +24,13 @@ func ProvideHomePage(writer http.ResponseWriter, request *http.Request) {
 
 	log.Printf("[providehomepage] request on /")
 
-	homePage := homePage{
-		Title: "Homepage",
-	}
-
 	template, err := template.New("home").ParseFS(static, "static/html/home.html")
 	if err != nil {
 		fmt.Fprintf(writer, "[providehomepage] could not provide template - error: %s", err)
 	}
 
 	writer.Header().Add("Content-Type", "text/html")
-	template.Execute(writer, homePage)
+	template.Execute(writer, homePage{
+		Title: "Homepage",
+	})
 }
