@@ -46,11 +46,11 @@ func (manager *Manager) Start() {
 		routes.ProvideShowPage)
 
 	if err := manager.provideFiles(); err != nil {
-		log.Fatalf("[router] could not provide files - error: %s", err)
+		log.Panicf("[router] could not provide files - error: %s", err)
 	}
 
 	if err := http.ListenAndServe(":"+manager.config.WebPort, manager.Router); err != nil {
-		log.Fatalf("[router] could not listen and serve - error: %s", err)
+		log.Panicf("[router] could not listen and serve - error: %s", err)
 	}
 }
 
