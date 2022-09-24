@@ -60,6 +60,7 @@ func ProvideShowPage(writer http.ResponseWriter, request *http.Request) {
 	}
 	showPage.Data = string(json)
 
+	// nolint: typecheck
 	template, err := template.New("show").ParseFS(static, "static/html/show.html")
 	if err != nil {
 		fmt.Fprintf(writer, "[provideshowpage] could not provide template - error: %s", err)
