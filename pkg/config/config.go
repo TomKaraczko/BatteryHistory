@@ -19,13 +19,16 @@ type Config struct {
 
 func GetConfig() *Config {
 	if instance == nil {
-		initConfig()
+		err := initConfig()
+		if err != nil {
+			log.Fatalf("[config] could not initialize config - error: %s", err.Error())
+		}	
 	}
 
 	return instance
 }
 
-func initConfig() {
+func initConfig() error {
 	instance = &Config{}
 
 	if _, err := os.Stat("./config.yaml"); err != nil {
@@ -34,16 +37,13 @@ func initConfig() {
 
 	file, err := os.Open("./config.yaml")
 	if err != nil {
-		log.Fatalf("[config] could not open file - error: %s", err.Error())
+		return err
 	}
 	defer file.Close()
 
 	d := yaml.NewDecoder(file)
 
-	if err := d.Decode(&instance); err != nil {
-		file.Close()
-		log.Fatalf("[config] could not decode file - error: %s", err.Error())
-	}
+	return d.Decode(&instance)
 }
 
 func createConfig() {
