@@ -41,6 +41,7 @@ func initConfig() {
 	d := yaml.NewDecoder(file)
 
 	if err := d.Decode(&instance); err != nil {
+		file.Close()
 		log.Fatalf("[config] could not decode file - error: %s", err.Error())
 	}
 }
