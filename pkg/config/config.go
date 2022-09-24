@@ -4,7 +4,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/Plaenkler/BatteryHistory/pkg/handler"
 	yaml "gopkg.in/yaml.v3"
 )
 
@@ -19,8 +18,6 @@ type Config struct {
 }
 
 func GetConfig() *Config {
-	defer handler.HandlePanic("config")
-
 	if instance == nil {
 		initConfig()
 	}
@@ -29,8 +26,6 @@ func GetConfig() *Config {
 }
 
 func initConfig() {
-	defer handler.HandlePanic("config")
-
 	instance = &Config{}
 
 	if _, err := os.Stat("./config.yaml"); err != nil {
