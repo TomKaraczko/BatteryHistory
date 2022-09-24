@@ -21,8 +21,8 @@ func GetConfig() *Config {
 	if instance == nil {
 		err := initConfig()
 		if err != nil {
-			log.Fatalf("[config] could not initialize config - error: %s", err.Error())
-		}	
+			log.Fatalf("[config] initialization failed - error: %s", err.Error())
+		}
 	}
 
 	return instance
