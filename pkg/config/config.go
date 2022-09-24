@@ -51,8 +51,6 @@ func initConfig() {
 }
 
 func createConfig() {
-	defer handler.HandlePanic("config")
-
 	config := Config{
 		ServerAddress:  "127.0.0.1",
 		ServerPort:     "8550",
@@ -66,7 +64,7 @@ func createConfig() {
 		log.Fatalf("[config] marshal failed - error: %s", err.Error())
 	}
 
-	err = os.WriteFile("config.yaml", data, 0644)
+	err = os.WriteFile("config.yaml", data, 0600)
 	if err != nil {
 		log.Fatalf("[config] unable to write data - error: %s", err.Error())
 	}
