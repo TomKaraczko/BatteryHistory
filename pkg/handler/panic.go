@@ -7,9 +7,9 @@ import (
 	"sync"
 )
 
-var Debug bool = false
-var index int = 0
-var mutex *sync.Mutex = &sync.Mutex{}
+var Debug = false
+var index = 0
+var mutex = &sync.Mutex{}
 
 func HandlePanic(section string) {
 	if err := recover(); err != nil {
