@@ -5,6 +5,7 @@ import (
 	"io/fs"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/Plaenkler/BatteryHistory/pkg/config"
 	"github.com/Plaenkler/BatteryHistory/pkg/handler"
@@ -45,11 +46,19 @@ func (manager *Manager) Start() {
 	manager.Router.HandleFunc("/show/",
 		routes.ProvideShowPage)
 
-	if err := manager.provideFiles(); err != nil {
+	err := manager.provideFiles(); 
+	if err != nil {
 		log.Panicf("[router] could not provide files - error: %s", err)
 	}
+	
+	server := &http.Server{
+		Addr: ":"+manager.config.WebPort,
+		ReadHeaderTimeout: 3* time.Second,
+		Handler: manager.Router,
+	}
 
-	if err := http.ListenAndServe(":"+manager.config.WebPort, manager.Router); err != nil {
+	err = server.ListenAndServe()
+	if err != nil {
 		log.Panicf("[router] could not listen and serve - error: %s", err)
 	}
 }
