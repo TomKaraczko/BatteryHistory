@@ -44,7 +44,7 @@ func (m *Manager) GetTags(response *model.TagResponse) error {
 
 	err = xml.Unmarshal(byteValue, response)
 	if err != nil {
-		return fmt.Errorf("[rtls] xml unmarshal failed: %s", err.Error())
+		return fmt.Errorf("[rtls] get tags xml unmarshal failed: %s", err.Error())
 	}
 
 	return nil
@@ -61,7 +61,7 @@ func (m *Manager) GetBattery(response *model.BatteryResponse, mac string) error 
 
 	err = xml.Unmarshal(byteValue, response)
 	if err != nil {
-		return fmt.Errorf("[rtls] xml unmarshal failed: %s", err.Error())
+		return fmt.Errorf("[rtls] get battery xml unmarshal failed: %s", err.Error())
 	}
 
 	return nil
