@@ -30,7 +30,10 @@ func ProvideHomePage(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	writer.Header().Add("Content-Type", "text/html")
-	template.Execute(writer, homePage{
+	err = template.Execute(writer, homePage{
 		Title: "Homepage",
 	})
+	if err != nil {
+		log.Panicf("[providehomepage] could not execute parsed template - error: %s", err)
+	}
 }

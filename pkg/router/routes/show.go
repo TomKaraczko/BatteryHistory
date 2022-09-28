@@ -68,5 +68,8 @@ func ProvideShowPage(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	writer.Header().Add("Content-Type", "text/html")
-	template.Execute(writer, showPage)
+	err = template.Execute(writer, showPage)
+	if err != nil {
+		log.Panicf("[provideshowpage] could not execute parsed template - error: %s", err)
+	}
 }
