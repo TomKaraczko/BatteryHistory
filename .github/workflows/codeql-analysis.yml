@@ -1,6 +1,6 @@
 ---
 
-name: "CodeQL"
+name: "github-codeql"
 
 on:
   push:
