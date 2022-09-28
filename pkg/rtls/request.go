@@ -3,7 +3,7 @@ package rtls
 import (
 	"encoding/xml"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 
 	"github.com/bobziuchkovski/digest"
@@ -72,23 +72,23 @@ func (m *Manager) call(url string) (*http.Response, []byte, error) {
 
 	prefix := "http://"
 
-	req, err := http.NewRequest("GET", prefix+m.config.ServerAddress+":"+m.config.ServerPort+url, nil)
+	req, err := http.NewRequest(http.MethodGet, prefix+m.config.ServerAddress+":"+m.config.ServerPort+url, nil)
 	if err != nil {
 		return nil, nil, fmt.Errorf("[rtls] creating http request failed: %s", err.Error())
 	}
 
 	resp, err := t.RoundTrip(req)
 	if err != nil {
-		return nil, nil, fmt.Errorf("[rtls] request_failed: %s", err.Error())
+		return nil, nil, fmt.Errorf("[rtls] request failed: %s", err.Error())
 	}
 
-	if resp.StatusCode != 200 {
-		return resp, nil, fmt.Errorf("[rtls] http_get_request_failed: %s", resp.Status)
+	if resp.StatusCode != http.StatusOK {
+		return resp, nil, fmt.Errorf("[rtls] http get request failed: %s", resp.Status)
 	}
 
-	byteValue, err := ioutil.ReadAll(resp.Body)
+	byteValue, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return resp, nil, fmt.Errorf("[rtls] reading_data_failed: %s", err.Error())
+		return resp, nil, fmt.Errorf("[rtls] reading data failed: %s", err.Error())
 	}
 
 	return resp, byteValue, nil
