@@ -36,10 +36,11 @@ func GetManager() *Manager {
 func (m *Manager) GetTags(response *model.TagResponse) error {
 	defer handler.HandlePanic("request")
 
-	_, byteValue, err := m.call("/epe/pos/taglist?fields=all")
+	resp, byteValue, err := m.call("/epe/pos/taglist?fields=all")
 	if err != nil {
 		return fmt.Errorf("[rtls] get tags failed: %s", err.Error())
 	}
+	defer resp.Body.Close()
 
 	err = xml.Unmarshal(byteValue, response)
 	if err != nil {
@@ -52,10 +53,11 @@ func (m *Manager) GetTags(response *model.TagResponse) error {
 func (m *Manager) GetBattery(response *model.BatteryResponse, mac string) error {
 	defer handler.HandlePanic("request")
 
-	_, byteValue, err := m.call("/epe/cfg/batteryhistory?mac=" + mac)
+	resp, byteValue, err := m.call("/epe/cfg/batteryhistory?mac=" + mac)
 	if err != nil {
 		return fmt.Errorf("[rtls] get battery failed: %s", err.Error())
 	}
+	defer resp.Body.Close()
 
 	err = xml.Unmarshal(byteValue, response)
 	if err != nil {
