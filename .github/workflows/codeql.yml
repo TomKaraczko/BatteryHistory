@@ -1,14 +1,11 @@
 ---
 
-name: "github-codeql"
+name: CodeQL
 
 on:
   push:
-    branches: main
   pull_request:
     branches: main
-  schedule:
-    - cron: '26 11 * * 4'
 
 jobs:
   analyze:
