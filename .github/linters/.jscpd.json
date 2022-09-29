@@ -4,8 +4,7 @@
     "consoleFull"
   ],
   "ignore": [
-    "**/__snapshots__/**",
-    "**/html/**"
+    "**/__snapshots__/**"
   ],
   "absolute": true
 }
