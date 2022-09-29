@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![Linters](https://github.com/Plaenkler/BatteryHistory/actions/workflows/linters.yml/badge.svg)](https://github.com/Plaenkler/BatteryHistory/actions/workflows/linters.yml)
-[![CodeQL](https://github.com/Plaenkler/BatteryHistory/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Plaenkler/BatteryHistory/actions/workflows/codeql-analysis.yml)
+[![CodeQL](https://github.com/Plaenkler/BatteryHistory/actions/workflows/codeql.yml/badge.svg)](https://github.com/Plaenkler/BatteryHistory/actions/workflows/codeql.yml)
 [![Goreport](https://goreportcard.com/badge/github.com/Plaenkler/BatteryHistory)](https://goreportcard.com/report/github.com/Plaenkler/BatteryHistory)
 
 BatteryHistory is a simple application that displays an interactive view of a battery discharge curve. Specifically, the battery history of any active RTLS tag can be viewed.
