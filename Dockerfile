@@ -20,6 +20,4 @@ COPY --from=build /battery-history /battery-history
 
 EXPOSE 9000
 
-USER nonroot:nonroot
-
 ENTRYPOINT ["/battery-history"]
