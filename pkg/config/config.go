@@ -68,10 +68,11 @@ func createConfig() {
 
 	pth, err := filepath.Abs("./config/config.yaml")
 	if err != nil {
-		log.Fatalf("[config] could not get filepath")
+		log.Printf("[config] could not get absolute path")
+		pth = "./config/config.yaml"
 	}
 
 	log.Printf("[config] created config.yaml path: %s", pth)
-	log.Print("[config] exiting...")
+	log.Println("[config] exiting...")
 	os.Exit(0)
 }
