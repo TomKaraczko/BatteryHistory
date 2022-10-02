@@ -1,6 +1,7 @@
 # 🔋 AiRISTA Flow RTLS - BatteryHistory
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![Release](https://img.shields.io/badge/Calver-YY.WW.REVISION-22bfda.svg)](https://calver.org/)
 [![Linters](https://github.com/Plaenkler/BatteryHistory/actions/workflows/linters.yml/badge.svg)](https://github.com/Plaenkler/BatteryHistory/actions/workflows/linters.yml)
 [![CodeQL](https://github.com/Plaenkler/BatteryHistory/actions/workflows/codeql.yml/badge.svg)](https://github.com/Plaenkler/BatteryHistory/actions/workflows/codeql.yml)
 [![Goreport](https://goreportcard.com/badge/github.com/Plaenkler/BatteryHistory)](https://goreportcard.com/report/github.com/Plaenkler/BatteryHistory)
@@ -19,6 +20,7 @@ BatteryHistory is a simple application that displays an interactive view of a ba
 ## ⚙️ How it works
 
 The application determines the data points for the curve by addressing the XML API of the RTLS controller. The MAC address of a tag is used as a filter. The API returns the entire battery history of the tag after authentication and request. The data is then plotted on a line graph.
+
 ## 🎯 Project goals
 
 - [x] Display battery history of any tag
@@ -29,4 +31,44 @@ The application determines the data points for the curve by addressing the XML A
 
 ## 📜 Installation guide
 
-The first thing to do is to clone the repository. After that you can simply run `go build` and start the compiled program in the terminal. At the first start the program creates a configuration file. Here the access data, port and IP address of the RTLS server must be entered. In addition, the port for the web server of the program must be selected.
+### Build from source
+
+From the root of the source tree, run:
+
+```text
+go build cmd/main.go
+```
+
+> Make sure that CGO is operational!
+
+### Deploy with Docker
+
+It is recommended to use [docker-compose](https://docs.docker.com/compose/) as it is very convenient. The following example shows a simple deployment without a proxy.
+
+```yaml
+version: '3.9'
+
+services:
+  battery-history:
+    image: plaenkler/battery-history:latest
+    container_name: battery-history
+    restart: unless-stopped
+    ports:
+      - 9000:9000
+    volumes:
+      - ./battery-history:/app/config
+```
+
+### Configuration
+
+At first startup, the program creates a config directory relative to the executable file and a `config.yaml` file in it. The first four parameters must be set according to the RTLS server configuration. The `webPort` is the port on which the web server of BatteryHistory listens.
+
+```yaml
+serverAddress: 127.0.0.1
+serverPort: "8550"
+serverUser: user
+serverPassword: password
+webPort: "9000"
+```
+
+
