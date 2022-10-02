@@ -43,4 +43,32 @@ go build cmd/main.go
 
 ### Deploy with Docker
 
+It is recommended to use [docker-compose](https://docs.docker.com/compose/) as it is very convenient. The following example shows a simple deployment without a proxy.
 
+```
+version: '3.9'
+
+services:
+  battery-history:
+    image: plaenkler/battery-history:latest
+    container_name: battery-history
+    restart: unless-stopped
+    ports:
+      - 9000:9000
+    volumes:
+      - ./battery-history:/app/config
+```
+
+### Configuration
+
+At first startup, the program creates a config directory relative to the executable file and a `config.yaml` file in it.
+
+```
+serverAddress: 127.0.0.1
+serverPort: "8550"
+serverUser: user
+serverPassword: password
+webPort: "9000"
+```
+
+The first four parameters must be set according to the RTLS server configuration. The `webPort` is the port on which the web server of BatteryHistory listens.
