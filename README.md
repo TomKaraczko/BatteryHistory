@@ -20,6 +20,7 @@ BatteryHistory is a simple application that displays an interactive view of a ba
 ## ⚙️ How it works
 
 The application determines the data points for the curve by addressing the XML API of the RTLS controller. The MAC address of a tag is used as a filter. The API returns the entire battery history of the tag after authentication and request. The data is then plotted on a line graph.
+
 ## 🎯 Project goals
 
 - [x] Display battery history of any tag
@@ -30,4 +31,16 @@ The application determines the data points for the curve by addressing the XML A
 
 ## 📜 Installation guide
 
-The first thing to do is to clone the repository. After that you can simply run `go build` and start the compiled program in the terminal. At the first start the program creates a configuration file. Here the access data, port and IP address of the RTLS server must be entered. In addition, the port for the web server of the program must be selected.
+### Build from source
+
+From the root of the source tree, run:
+
+```
+go build cmd/main.go
+```
+
+> Make sure that CGO is operational!
+
+### Deploy with Docker
+
+
