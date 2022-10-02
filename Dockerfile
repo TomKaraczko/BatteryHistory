@@ -3,16 +3,13 @@
 ## Build
 FROM golang:1.19-bullseye AS build
 
-# Copy files to WORKDIR
 WORKDIR /app
 COPY . /app
 
-# Build BatteryHistory
-RUN go mod tidy
-RUN go build -o /battery-history cmd/main.go
+RUN go mod tidy && go build -o /battery-history cmd/main.go
 
 ## Deploy
-FROM gcr.io/distroless/base-debian11
+FROM gcr.io/distroless/base-debian11:latest
 
 WORKDIR /
 
