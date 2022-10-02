@@ -6,15 +6,15 @@ FROM golang:1.19-bullseye AS build
 WORKDIR /app
 COPY . /app
 
-RUN go mod tidy && go build -o /battery-history cmd/main.go
+RUN go mod tidy && go build -o /bthist cmd/main.go
 
 ## Deploy
 FROM gcr.io/distroless/base-debian11:latest
 
-WORKDIR /
+WORKDIR /app
 
-COPY --from=build /battery-history /battery-history
+COPY --from=build /bthist /app/bthist
 
 EXPOSE 9000
 
-ENTRYPOINT ["/battery-history"]
+ENTRYPOINT ["./bthist"]

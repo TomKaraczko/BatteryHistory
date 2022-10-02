@@ -3,6 +3,7 @@ package config
 import (
 	"log"
 	"os"
+	"path/filepath"
 
 	yaml "gopkg.in/yaml.v3"
 )
@@ -31,11 +32,11 @@ func GetConfig() *Config {
 func initConfig() error {
 	instance = &Config{}
 
-	if _, err := os.Stat("./config.yaml"); err != nil {
+	if _, err := os.Stat("./config/config.yaml"); err != nil {
 		createConfig()
 	}
 
-	file, err := os.Open("./config.yaml")
+	file, err := os.Open("./config/config.yaml")
 	if err != nil {
 		return err
 	}
@@ -60,11 +61,18 @@ func createConfig() {
 		log.Fatalf("[config] marshal failed - error: %s", err.Error())
 	}
 
-	err = os.WriteFile("config.yaml", data, 0600)
+	err = os.WriteFile("./config/config.yaml", data, 0600)
 	if err != nil {
 		log.Fatalf("[config] unable to write data - error: %s", err.Error())
 	}
 
-	log.Print("[config] Created config.yaml exiting...")
+	pth, err := filepath.Abs("./config/config.yaml")
+	if err != nil {
+		log.Printf("[config] could not get absolute path")
+		pth = "./config/config.yaml"
+	}
+
+	log.Printf("[config] created config.yaml path: %s", pth)
+	log.Println("[config] exiting...")
 	os.Exit(0)
 }
