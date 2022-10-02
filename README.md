@@ -35,7 +35,7 @@ The application determines the data points for the curve by addressing the XML A
 
 From the root of the source tree, run:
 
-```
+```text
 go build cmd/main.go
 ```
 
@@ -45,7 +45,7 @@ go build cmd/main.go
 
 It is recommended to use [docker-compose](https://docs.docker.com/compose/) as it is very convenient. The following example shows a simple deployment without a proxy.
 
-```
+```yaml
 version: '3.9'
 
 services:
@@ -63,7 +63,7 @@ services:
 
 At first startup, the program creates a config directory relative to the executable file and a `config.yaml` file in it. The first four parameters must be set according to the RTLS server configuration. The `webPort` is the port on which the web server of BatteryHistory listens.
 
-```
+```yaml
 serverAddress: 127.0.0.1
 serverPort: "8550"
 serverUser: user
