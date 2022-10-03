@@ -61,7 +61,7 @@ services:
 
 ### Configuration
 
-At first startup, the program creates a config directory relative to the executable file and a `config.yaml` file in it. The first four parameters must be set according to the RTLS server configuration. The `webPort` is the port on which the web server of BatteryHistory listens.
+At first startup, the program creates a config directory relative to the executable file and a `config.yaml` file in it. The first four parameters must be set according to the RTLS server configuration. The `webPort` is the port on which the webserver of BatteryHistory listens.
 
 ```yaml
 serverAddress: 127.0.0.1
