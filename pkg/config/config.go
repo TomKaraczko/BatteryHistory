@@ -33,7 +33,10 @@ func initConfig() error {
 	instance = &Config{}
 
 	if _, err := os.Stat("./config/config.yaml"); err != nil {
-		createConfig()
+		err = createConfig()
+		if err != nil {
+			return err
+		}
 	}
 
 	file, err := os.Open("./config/config.yaml")
@@ -47,7 +50,7 @@ func initConfig() error {
 	return d.Decode(&instance)
 }
 
-func createConfig() {
+func createConfig() error {
 	config := Config{
 		ServerAddress:  "127.0.0.1",
 		ServerPort:     "8550",
@@ -58,12 +61,20 @@ func createConfig() {
 
 	data, err := yaml.Marshal(&config)
 	if err != nil {
-		log.Fatalf("[config] marshal failed - error: %s", err.Error())
+		return err
+	}
+
+	_, err = os.Stat("./config")
+	if os.IsNotExist(err) {
+		err = os.Mkdir("./config", os.ModePerm); 
+		if err != nil {
+			return err
+		}
 	}
 
 	err = os.WriteFile("./config/config.yaml", data, 0600)
 	if err != nil {
-		log.Fatalf("[config] unable to write data - error: %s", err.Error())
+		return err
 	}
 
 	pth, err := filepath.Abs("./config/config.yaml")
@@ -75,4 +86,5 @@ func createConfig() {
 	log.Printf("[config] created config.yaml path: %s", pth)
 	log.Println("[config] exiting...")
 	os.Exit(0)
+	return nil
 }
