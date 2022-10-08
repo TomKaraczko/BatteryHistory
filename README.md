@@ -39,8 +39,6 @@ From the root of the source tree, run:
 go build cmd/main.go
 ```
 
-> Make sure that CGO is operational!
-
 ### Deploy with Docker
 
 It is recommended to use [docker-compose](https://docs.docker.com/compose/) as it is very convenient. The following example shows a simple deployment without a proxy.
