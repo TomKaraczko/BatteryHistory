@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"github.com/bobziuchkovski/digest"
-	"gorm.io/gorm"
 
 	"github.com/Plaenkler/BatteryHistory/pkg/config"
 	"github.com/Plaenkler/BatteryHistory/pkg/handler"
@@ -17,7 +16,6 @@ import (
 var instance *Manager
 
 type Manager struct {
-	DB     *gorm.DB
 	config *config.Config
 }
 
