@@ -4,11 +4,16 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sync"
 
+	"github.com/Plaenkler/BatteryHistory/pkg/handler"
 	yaml "gopkg.in/yaml.v3"
 )
 
-var instance *Config
+var (
+	instance *Config
+	once     sync.Once
+)
 
 type Config struct {
 	ServerAddress  string `yaml:"serverAddress"`
@@ -19,19 +24,19 @@ type Config struct {
 }
 
 func GetConfig() *Config {
-	if instance == nil {
+	defer handler.HandlePanic("config")
+
+	once.Do(func() {
 		err := initConfig()
 		if err != nil {
 			log.Fatalf("[config] initialization failed - error: %s", err.Error())
 		}
-	}
+	})
 
 	return instance
 }
 
 func initConfig() error {
-	instance = &Config{}
-
 	if _, err := os.Stat("./config/config.yaml"); err != nil {
 		err = createConfig()
 		if err != nil {
@@ -66,7 +71,7 @@ func createConfig() error {
 
 	_, err = os.Stat("./config")
 	if os.IsNotExist(err) {
-		err = os.Mkdir("./config", os.ModePerm); 
+		err = os.Mkdir("./config", os.ModePerm)
 		if err != nil {
 			return err
 		}
