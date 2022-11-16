@@ -5,6 +5,7 @@ import (
 	"io/fs"
 	"log"
 	"net/http"
+	"sync"
 	"time"
 
 	"github.com/Plaenkler/BatteryHistory/pkg/config"
@@ -16,21 +17,21 @@ var (
 	//go:embed routes/static
 	static   embed.FS
 	instance *Manager
+	once     sync.Once
 )
 
 type Manager struct {
 	Router *http.ServeMux
-	config *config.Config
 }
 
 func GetManager() *Manager {
 	defer handler.HandlePanic("router")
 
-	if instance == nil {
+	once.Do(func() {
 		instance = &Manager{
-			config: config.GetConfig(),
+			Router: http.NewServeMux(),
 		}
-	}
+	})
 
 	return instance
 }
@@ -38,23 +39,21 @@ func GetManager() *Manager {
 func (manager *Manager) Start() {
 	defer handler.HandlePanic("router")
 
-	manager.Router = http.NewServeMux()
-
 	manager.Router.HandleFunc("/",
 		routes.ProvideHomePage)
 
 	manager.Router.HandleFunc("/show/",
 		routes.ProvideShowPage)
 
-	err := manager.provideFiles(); 
+	err := manager.provideFiles()
 	if err != nil {
 		log.Panicf("[router] could not provide files - error: %s", err)
 	}
-	
+
 	server := &http.Server{
-		Addr: ":"+manager.config.WebPort,
-		ReadHeaderTimeout: 3* time.Second,
-		Handler: manager.Router,
+		Addr:              ":" + config.GetConfig().WebPort,
+		ReadHeaderTimeout: 3 * time.Second,
+		Handler:           manager.Router,
 	}
 
 	err = server.ListenAndServe()
@@ -66,12 +65,12 @@ func (manager *Manager) Start() {
 func (manager *Manager) provideFiles() error {
 	defer handler.HandlePanic("router")
 
-	css, err := fs.Sub(static, "routes/static")
+	fs, err := fs.Sub(static, "routes/static")
 	if err != nil {
 		return err
 	}
 
-	manager.Router.Handle("/css/", http.FileServer(http.FS(css)))
+	manager.Router.Handle("/css/", http.FileServer(http.FS(fs)))
 
 	return nil
 }
