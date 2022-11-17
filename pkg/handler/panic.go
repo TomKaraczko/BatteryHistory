@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"log"
 	"runtime/debug"
 	"sync"
@@ -20,7 +19,7 @@ func HandlePanic(section string) {
 
 		if Debug {
 			log.Printf("[%v] [%v] stack trace:", section, index)
-			fmt.Println(string(debug.Stack()))
+			log.Println(string(debug.Stack()))
 		}
 
 		index++
