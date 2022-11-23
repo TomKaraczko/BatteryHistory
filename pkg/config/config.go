@@ -19,7 +19,7 @@ type Config struct {
 	ServerPort     string `yaml:"serverPort"`
 	ServerUser     string `yaml:"serverUser"`
 	ServerPassword string `yaml:"serverPassword"`
-	WebPort        string `yaml:"webPort"`
+	Port           string `yaml:"Port"`
 }
 
 func GetConfig() *Config {
@@ -63,7 +63,7 @@ func createConfig() error {
 		ServerPort:     "8550",
 		ServerUser:     "user",
 		ServerPassword: "password",
-		WebPort:        "9000",
+		Port:           "9000",
 	}
 
 	data, err := yaml.Marshal(&config)
