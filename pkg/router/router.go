@@ -42,7 +42,7 @@ func (manager *Manager) Start() {
 	manager.Router.HandleFunc("/",
 		routes.ProvideHomePage)
 
-	manager.Router.HandleFunc("/show/",
+	manager.Router.HandleFunc("/show",
 		routes.ProvideShowPage)
 
 	err := manager.provideFiles()
@@ -51,7 +51,7 @@ func (manager *Manager) Start() {
 	}
 
 	server := &http.Server{
-		Addr:              ":" + config.GetConfig().WebPort,
+		Addr:              ":" + config.GetConfig().Port,
 		ReadHeaderTimeout: 3 * time.Second,
 		Handler:           manager.Router,
 	}

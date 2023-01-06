@@ -3,7 +3,6 @@ package config
 import (
 	"log"
 	"os"
-	"path/filepath"
 	"sync"
 
 	"github.com/Plaenkler/BatteryHistory/pkg/handler"
@@ -20,7 +19,7 @@ type Config struct {
 	ServerPort     string `yaml:"serverPort"`
 	ServerUser     string `yaml:"serverUser"`
 	ServerPassword string `yaml:"serverPassword"`
-	WebPort        string `yaml:"webPort"`
+	Port           string `yaml:"Port"`
 }
 
 func GetConfig() *Config {
@@ -50,9 +49,12 @@ func initConfig() error {
 	}
 	defer file.Close()
 
-	d := yaml.NewDecoder(file)
+	err = yaml.NewDecoder(file).Decode(&instance)
+	if err != nil {
+		return err
+	}
 
-	return d.Decode(&instance)
+	return nil
 }
 
 func createConfig() error {
@@ -61,7 +63,7 @@ func createConfig() error {
 		ServerPort:     "8550",
 		ServerUser:     "user",
 		ServerPassword: "password",
-		WebPort:        "9000",
+		Port:           "9000",
 	}
 
 	data, err := yaml.Marshal(&config)
@@ -82,14 +84,7 @@ func createConfig() error {
 		return err
 	}
 
-	pth, err := filepath.Abs("./config/config.yaml")
-	if err != nil {
-		log.Printf("[config] could not get absolute path")
-		pth = "./config/config.yaml"
-	}
-
-	log.Printf("[config] created config.yaml path: %s", pth)
-	log.Println("[config] exiting...")
+	log.Println("[config] created default configuration file exiting...")
 	os.Exit(0)
 	return nil
 }
