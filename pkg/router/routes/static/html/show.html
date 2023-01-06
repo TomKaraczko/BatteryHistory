@@ -31,7 +31,7 @@
         <div id="chart" style="width:100%; height:300px;"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
 
     <script type="text/javascript">
         var chart = echarts.init(document.getElementById('chart'), "dark");
@@ -52,6 +52,7 @@
         var option = {
             backgroundColor: '#343a40',
             tooltip: {
+                confine: true,
                 trigger: "axis",
                 position: function (pt) {
                     return [pt[0], "10%"];
