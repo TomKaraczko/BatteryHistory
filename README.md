@@ -29,6 +29,7 @@ The application determines the data points for the curve by addressing the XML A
 - [x] Interactive selection of the period to be viewed
 - [ ] Screenshot function for the adjusted display
 - [ ] Import all MAC addresses for easy selection
+- [x] Provide Windows installer
 
 ## 📜 Installation guide
 
