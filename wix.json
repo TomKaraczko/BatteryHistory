@@ -1,0 +1,39 @@
+{
+  "product": "Battery History",
+  "company": "LaKiS GbR",
+  "license": "LICENSE",
+  "upgrade-code": "c5a78641-3ea6-41ef-b412-c6d370465b53",
+  "files": {
+    "guid": "052cc4f5-23db-4fa6-81df-4fba127fe666",
+    "items": [
+      "temp/battery-history.exe",
+      "LICENSE"
+    ]
+  },
+  "env": {
+    "guid": "aa6fcd18-5354-4323-895c-6feecdd9a465",
+    "vars": [
+      {
+        "name": "PATH",
+        "value": "[INSTALLDIR]",
+        "permanent": "no",
+        "system": "no",
+        "action": "set",
+        "part": "last"
+      }
+    ]
+  },
+  "shortcuts": {
+    "guid": "db94a7f3-8c81-480d-8c8e-6345f2a63819",
+    "items": [
+      {
+        "name": "Battery History",
+        "description": "BatteryHistory is a simple application that displays an interactive view of a battery discharge curve. Specifically, the battery history of any active RTLS tag can be viewed.",
+        "target": "[INSTALLDIR]\\battery-history.exe",
+        "wdir": "INSTALLDIR",
+        "arguments": "",
+        "icon": ""
+      }
+    ]
+  }
+}
