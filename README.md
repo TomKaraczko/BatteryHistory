@@ -5,6 +5,7 @@
 [![Linters](https://github.com/Plaenkler/BatteryHistory/actions/workflows/linters.yml/badge.svg)](https://github.com/Plaenkler/BatteryHistory/actions/workflows/linters.yml)
 [![CodeQL](https://github.com/Plaenkler/BatteryHistory/actions/workflows/codeql.yml/badge.svg)](https://github.com/Plaenkler/BatteryHistory/actions/workflows/codeql.yml)
 [![Goreport](https://goreportcard.com/badge/github.com/Plaenkler/BatteryHistory)](https://goreportcard.com/report/github.com/Plaenkler/BatteryHistory)
+[![Support me](https://img.shields.io/badge/Support%20me%20%E2%98%95-orange.svg)](https://www.buymeacoffee.com/Plaenkler)
 
 BatteryHistory is a simple application that displays an interactive view of a battery discharge curve. Specifically, the battery history of any active RTLS tag can be viewed.
 
@@ -59,7 +60,9 @@ services:
 
 ### Configuration
 
-At first startup, the program creates a config directory relative to the executable file and a `config.yaml` file in it. The first four parameters must be set according to the RTLS server configuration. The last parameter is the `Port` on which the web server of BatteryHistory listens.
+At first startup, the program creates a `config` directory relative to the executable file and a `config.yaml` file in it. In this document all settings of the application are stored.
+* The first four parameters must be set according to the RTLS server configuration.
+* The last parameter is the `Port` on which the web server of BatteryHistory listens.
 
 ```yaml
 serverAddress: 127.0.0.1
