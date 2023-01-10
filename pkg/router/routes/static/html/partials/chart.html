@@ -4,10 +4,9 @@
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
 
 <script>
-var chart = echarts.init(document.getElementById('chart'), 'dark')
-var json = '{{ .Data }}'
-var data = JSON.parse(json)
-var series = {
+let chart = echarts.init(document.getElementById('chart'), 'dark')
+let data = JSON.parse('{{ .Data }}')
+let series = {
     data: [],
     type: 'line',
     smooth: false,
@@ -19,7 +18,7 @@ Object.values(data.Batteries).forEach((battery) => {
     series.data.push([battery.Time, battery.Load])
 })
 
-var option = {
+let option = {
     backgroundColor: '#343a40',
     tooltip: {
         confine: true,
