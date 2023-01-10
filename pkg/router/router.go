@@ -71,6 +71,7 @@ func (manager *Manager) provideFiles() error {
 	}
 
 	manager.Router.Handle("/css/", http.FileServer(http.FS(fs)))
+	manager.Router.Handle("/img/", http.FileServer(http.FS(fs)))
 
 	return nil
 }

@@ -34,7 +34,11 @@ func ProvideHomePage(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	template, err := template.New("home").ParseFS(static, "static/html/home.html")
+	// nolint: typecheck
+	template, err := template.New("home").ParseFS(static,
+		"static/html/pages/home.html",
+		"static/html/partials/include.html",
+	)
 	if err != nil {
 		fmt.Fprintf(writer, "[provide homepage] could not provide template - error: %s", err)
 		return
