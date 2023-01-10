@@ -1,0 +1,29 @@
+<!-- htmlhint doctype-first:false -->
+{{ define "show" }}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        {{template "head" .}}
+
+        <title>Showpage</title>
+    </head>
+
+    <body>
+        <div class="parent" style="width: 100%">
+            <h1>Battery history</h1>
+            <div id="chart" style="width: 100%; height: 300px"></div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+        <script src="/js/linechart.js"></script>
+
+        {{template "body" .}}
+    </body>
+</html>
+{{ end }}

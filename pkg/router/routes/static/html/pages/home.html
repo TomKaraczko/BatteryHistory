@@ -1,0 +1,33 @@
+<!-- htmlhint doctype-first:false -->
+{{ define "home" }}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        {{template "head" .}}
+
+        <title>Homepage</title>
+    </head>
+    <body>
+        <div class="parent">
+            <h1>Enter MAC</h1>
+            <form action="/show" method="post">
+                <input
+                    type="text"
+                    name="device"
+                    value="C4:CB:6B:"
+                    placeholder="00:00:00:00:00:00"
+                />
+                <input type="submit" hidden />
+            </form>
+        </div>
+
+        {{template "body" .}}
+    </body>
+</html>
+{{ end }}
