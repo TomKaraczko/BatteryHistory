@@ -71,6 +71,7 @@ func ProvideShowPage(writer http.ResponseWriter, request *http.Request) {
 	template, err := template.New("show").ParseFS(static,
 		"static/html/pages/show.html",
 		"static/html/partials/include.html",
+		"static/html/partials/chart.html",
 	)
 	if err != nil {
 		fmt.Fprintf(writer, "[provide showpage] could not provide template - error: %s", err)

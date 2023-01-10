@@ -1,3 +1,9 @@
+<!-- htmlhint doctype-first:false -->
+{{ define "chart" }}
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+
+<script>
 var chart = echarts.init(document.getElementById('chart'), 'dark')
 var json = '{{ .Data }}'
 var data = JSON.parse(json)
@@ -75,3 +81,5 @@ window.onresize = function () {
         })
     }
 }
+</script>
+{{ end }}
