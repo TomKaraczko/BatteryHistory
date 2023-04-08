@@ -6,10 +6,9 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/bobziuchkovski/digest"
-
 	"github.com/Plaenkler/BatteryHistory/pkg/config"
 	"github.com/Plaenkler/BatteryHistory/pkg/handler"
+	"github.com/Plaenkler/BatteryHistory/pkg/rtls/digest"
 	"github.com/Plaenkler/BatteryHistory/pkg/rtls/model"
 )
 
@@ -17,14 +16,21 @@ var instance *Manager
 
 type Manager struct {
 	config *config.Config
+	client *http.Client
 }
 
 func GetManager() *Manager {
 	defer handler.HandlePanic("request")
 
 	if instance == nil {
+		client, err := digest.NewTransport(config.GetConfig().ServerUser, config.GetConfig().ServerPassword, 3).Client()
+		if err != nil {
+			panic(fmt.Errorf("[rtls] creating client failed: %s", err.Error()))
+		}
+
 		instance = &Manager{
 			config: config.GetConfig(),
+			client: client,
 		}
 	}
 
@@ -68,16 +74,12 @@ func (m *Manager) GetBattery(response *model.BatteryResponse, mac string) error 
 func (m *Manager) call(url string) (*http.Response, []byte, error) {
 	defer handler.HandlePanic("request")
 
-	t := digest.NewTransport(m.config.ServerUser, m.config.ServerPassword)
-
-	prefix := "http://"
-
-	req, err := http.NewRequest(http.MethodGet, prefix+m.config.ServerAddress+":"+m.config.ServerPort+url, nil)
+	req, err := http.NewRequest(http.MethodGet, "http://"+m.config.ServerAddress+":"+m.config.ServerPort+url, nil)
 	if err != nil {
 		return nil, nil, fmt.Errorf("[rtls] creating http request failed: %s", err.Error())
 	}
 
-	resp, err := t.RoundTrip(req)
+	resp, err := m.client.Do(req)
 	if err != nil {
 		return nil, nil, fmt.Errorf("[rtls] request failed: %s", err.Error())
 	}
